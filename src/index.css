@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  background-color: #fff7ee;
+
+  /* font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; */
+}
+
+@font-face {
+  font-family: "RooftopDodo";
+  src: url("/fonts/rooftop/RooftopDodo-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "RooftopDodoBold";
+  src: url("/fonts/rooftop/RooftopDodo-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "RooftopDodoMedium";
+  src: url("/fonts/rooftop/RooftopDodo-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "HelveticaNeueCyrBlack";
+  src: url("/fonts/helvetica/helveticaneuecyr-black.ttf") format("truetype");
+  font-weight: 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: "HelveticaNeueCyrBold";
+  src: url("/fonts/helvetica/helveticaneuecyr-bold.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
+
+@theme {
+  --font-rooftop-bold: RooftopDodoBold, sans-serif;
+  --font-rooftop-medium: RooftopDodoMedium, sans-serif;
+  --font-rooftop: RooftopDodo, sans-serif;
+  --font-helvetica-black: HelveticaNeueCyrBlack, sans-serif;
+  --font-helvetica-bold: HelveticaNeueCyrBold, sans-serif;
+}
