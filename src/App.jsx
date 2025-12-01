@@ -1,6 +1,6 @@
 import { DiyDecor } from "./components/DiyDecor";
 import { FashionDetail } from "./components/FashionDetail";
-import FashionTips from "./components/fashionTips";
+import FashionTips from "./components/FashionTips";
 
 import { Footer } from "./components/Footer";
 import { HeadBlock } from "./components/HeadBlock";
