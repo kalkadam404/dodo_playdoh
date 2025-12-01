@@ -83,7 +83,7 @@ export function ReadCardsBlock() {
   }, []);
 
   return (
-    <div className="bg-[#0AC5A4] rounded-[60px] flex flex-col gap-20 items-center justify-center py-20  max-sm:py-15 max-sm:px-4 -mt-14 max-sm:rounded-[40px] max-sm:gap-10">
+    <div className="bg-[#0AC5A4] rounded-[60px] flex flex-col gap-20 items-center justify-center py-20  max-sm:py-15 max-sm:px-4 -mt-14 max-sm:rounded-[40px] max-sm:gap-5">
       <h2 className="text-8xl max-sm:text-[54px] text-white font-helvetica-black leading-none max-sm:text-center">
         FASHION TIPS ELLE
       </h2>

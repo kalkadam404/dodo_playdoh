@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ReadCardsBlock } from "./ReadCardsBlock";
 import DodoAndPlayDoh from "/playdoh.png";
 import { useGSAP } from "@gsap/react";
@@ -18,6 +18,19 @@ function FashionTips() {
   const paragraphRef = useRef(null);
   const buttonsRef = useRef(null);
   const [promo, setPromo] = useState(getCurrentPromoCode());
+
+  useEffect(() => {
+    const handlePromoUpdate = () => {
+      const newPromo = getCurrentPromoCode();
+      setPromo(newPromo);
+    };
+
+    window.addEventListener("promoCodeUpdated", handlePromoUpdate);
+
+    return () => {
+      window.removeEventListener("promoCodeUpdated", handlePromoUpdate);
+    };
+  }, []);
 
   useGSAP(() => {
     const tl = gsap.timeline({

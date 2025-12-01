@@ -21,6 +21,10 @@ export function getPromoCode() {
   // Сохраняем промокод для текущего пользователя
   localStorage.setItem("currentPromoCode", code);
 
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new Event("promoCodeUpdated"));
+  }
+
   return code;
 }
 
