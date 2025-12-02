@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { DiyDecor } from "./components/DiyDecor";
 import { FashionDetail } from "./components/FashionDetail";
 import FashionTips from "./components/FashionTips";
@@ -9,20 +10,25 @@ import { WhoAreBlock } from "./components/WhoAreBlock";
 import { YourDuo } from "./components/YourDuo";
 
 function App() {
+  const [testFinished, setTestFinished] = useState(false);
   return (
     <>
       <div className="container mx-auto py-20 ">
         <HeadBlock />
-        <WhoAreBlock />
+        <WhoAreBlock onFinish={() => setTestFinished(true)} />
       </div>
-      <YourDuo />
-      <FashionTips />
-      <div className="container mx-auto py-20">
-        <TrendColor />
-        <FashionDetail />
-        <DiyDecor />
-        <Footer />
-      </div>
+      {testFinished && (
+        <>
+          <YourDuo />
+          <FashionTips />
+          <div className="container mx-auto py-20">
+            <TrendColor />
+            <FashionDetail />
+            <DiyDecor />
+            <Footer />
+          </div>
+        </>
+      )}
     </>
   );
 }

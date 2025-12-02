@@ -1,0 +1,51 @@
+export const slides = [
+  {
+    id: 1,
+    idText: "1.",
+    img: "/clock.png",
+    question: "Чем вы любите заниматься вместе с ребенком в свободное время?",
+    borderColor: "#F7A517",
+    rotate: 1,
+  },
+  {
+    id: 2,
+    idText: "2.",
+    img: "/bearB.png",
+    question:
+      "Какое животное из Красной книги Казахстана выбрал бы ваш ребенок?",
+    borderColor: "#EE1C24",
+    rotate: 6,
+  },
+  {
+    id: 3,
+    idText: "3.",
+    img: "/tractor.png",
+    question: "Какой сценарий семейного досуга вам ближе всего?",
+    borderColor: "#02B59E",
+    rotate: 8,
+  },
+  {
+    id: 4,
+    idText: "4.",
+    img: "/dodo.png",
+    question: "Какое любимое блюдо в Dodo у вашего ребенка?",
+    borderColor: "#9A258E",
+    rotate: 6,
+  },
+  {
+    id: 5,
+    idText: "5.",
+    img: "/sun_w.png",
+    question: "Что обычно приносит вам и ребенку больше всего радости?",
+    borderColor: "#E4185C",
+    rotate: 4,
+  },
+  {
+    id: 6,
+    idText: "",
+    img: null,
+    borderColor: "#FF6B01",
+    rotate: 0,
+    question: "",
+  },
+];

@@ -45,16 +45,6 @@ function FashionTips() {
       duration: 0.7,
       ease: "elastic.inOut",
     })
-      .from(
-        svg2Ref.current,
-        { y: -200, opacity: 0, duration: 1, ease: "elastic.inOut" },
-        "-=0.5"
-      )
-      .from(
-        svg3Ref.current,
-        { y: -200, opacity: 0, duration: 1, ease: "elastic.inOut" },
-        "-=0.5"
-      )
       .from(headingRef.current, {
         opacity: 0,
         y: 20,
@@ -141,9 +131,11 @@ function FashionTips() {
             </div>
           </div>
           <div className="relative w-full max-w-lg ">
-            <div className="flex gap-5 items-center">
+            <div
+              ref={svg1Ref}
+              className="flex gap-5 items-center pointer-events-none"
+            >
               <svg
-                ref={svg1Ref}
                 xmlns="http://www.w3.org/2000/svg"
                 width="154"
                 height="44"
@@ -168,7 +160,6 @@ function FashionTips() {
                 />
               </svg>
               <svg
-                ref={svg2Ref}
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"
                 height="20"
@@ -181,7 +172,6 @@ function FashionTips() {
                 />
               </svg>
               <svg
-                ref={svg3Ref}
                 xmlns="http://www.w3.org/2000/svg"
                 width="270"
                 height="44"

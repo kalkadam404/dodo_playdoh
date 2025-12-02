@@ -3,140 +3,20 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollToPlugin, ScrollTrigger } from "gsap/all";
 import { getCurrentPromoCode, getPromoCode } from "../utils/getPromoCode";
+import { YourDuoBlock } from "./YourDuoBlock";
+import { slides } from "../constants/slideList";
+import { testVariants } from "../constants/test";
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
-export function WhoAreBlock() {
+
+export function WhoAreBlock({ onFinish }) {
   const [started, setStarted] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState({});
-  const [showResult, setShowResult] = useState(false);
+  const [showResult, setShowResult] = useState(true);
   const [promo, setPromo] = useState(null);
 
   const leftBlockRef = useRef(null);
   const rightBlockRef = useRef(null);
-  const testVariants = [
-    {
-      id: 1,
-      variantA: "Рисовать, лепить фигурки и мастерить поделки",
-      variantB:
-        "Читать книги, смотреть познавательные передачи или посещать музей",
-      variantC: "Готовить вместе или пробовать новые блюда и рецепты",
-    },
-    {
-      id: 2,
-      variantA: "Фламинго ",
-      variantB: "Снежный барс",
-      variantC: "Каспийская нерпа",
-    },
-    {
-      id: 3,
-      variantA:
-        "Вы вместе с ребенком украшаете торт или печенье, придумываете собственные шедевры из теста",
-      variantB:
-        "Вы обсуждаете интересные факты о животных, динозаврах или океане, узнаете что-то новое ",
-      variantC:
-        "Вы устраиваете семейный пикник или ужин и наслаждаетесь приготовлением и дегустацией ",
-    },
-    {
-      id: 4,
-      variantA: "Яркая пицца с необычной начинкой",
-      variantB: "Горячий картофель фри из печи",
-      variantC: "Интересная закуска: Додстер или Дэнвич",
-    },
-    {
-      id: 5,
-      variantA: "Когда можно пофантазировать и создать что-то своими руками ",
-      variantB: "Когда можно вместе исследовать новый мир и расширять кругозор",
-      variantC:
-        "Когда можно порадовать вкусовые рецепторы и угостить друг друга чем-то особенным",
-    },
-    {
-      id: 6,
-      variantA: "5–8 баллов ",
-      variantB: "8–12 баллов",
-      variantC: "12–15 баллов",
-    },
-  ];
-
-  const slides = [
-    {
-      id: 1,
-      idText: "1.",
-      img: "/clock.png",
-      question: "Чем вы любите заниматься вместе с ребенком в свободное время?",
-      borderColor: "#F7A517",
-    },
-    {
-      id: 2,
-      idText: "2.",
-      img: "/bearB.png",
-      question:
-        "Какое животное из Красной книги Казахстана выбрал бы ваш ребенок?",
-      borderColor: "#EE1C24",
-    },
-    {
-      id: 3,
-      idText: "3.",
-      img: "/tractor.png",
-      question: "Какой сценарий семейного досуга вам ближе всего?",
-      borderColor: "#02B59E",
-    },
-    {
-      id: 4,
-      idText: "4.",
-      img: "/dodo.png",
-      question: "Какое любимое блюдо в Dodo у вашего ребенка?",
-      borderColor: "#9A258E",
-    },
-    {
-      id: 5,
-      idText: "5.",
-      img: "/sun_w.png",
-      question: "Что обычно приносит вам и ребенку больше всего радости?",
-      borderColor: "#E4185C",
-    },
-  ];
-
-  const containerRef = useRef(null);
-  const textRef = useRef(null);
-  const buttonRef = useRef(null);
-  useGSAP(() => {
-    const elements = Array.from(containerRef.current.children);
-    gsap.from(elements, {
-      opacity: 0,
-      y: 20, // лёгкое смещение вниз
-      duration: 0.6, // время анимации каждого элемента
-      stagger: 0.3, // задержка между элементами
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top 80%", // когда верх контейнера достигнет 80% экрана
-      },
-    });
-    gsap.from(textRef.current, {
-      opacity: 0,
-      y: 20,
-      duration: 0.6,
-      delay: 1.8, // после заголовков
-      ease: "power1.out",
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top 80%", // когда верх контейнера достигнет 80% экрана
-      },
-    });
-    // Анимация кнопки с небольшой задержкой после текста
-    gsap.from(buttonRef.current, {
-      opacity: 0,
-      y: 20,
-      scale: 0.95,
-      duration: 0.6,
-      delay: 2,
-      ease: "power1.out",
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top 80%", // когда верх контейнера достигнет 80% экрана
-      },
-    });
-  }, []);
 
   useGSAP(() => {
     if (started && !showResult) {
@@ -152,7 +32,29 @@ export function WhoAreBlock() {
         "-=0.6"
       ); // перекрытие анимации
     }
-  }, [started, currentQuestion, showResult]);
+  }, [started]);
+
+  useGSAP(() => {
+    if (!leftBlockRef.current) return;
+    const cards = leftBlockRef.current.querySelectorAll(".slide-card");
+    const targetIndex = currentQuestion;
+
+    cards.forEach((card, index) => {
+      const isPastCard = index < targetIndex;
+      const isActiveCard = index === targetIndex;
+
+      if (isPastCard) gsap.set(card, { zIndex: 40 });
+      else if (isActiveCard) gsap.set(card, { zIndex: 30 });
+      else gsap.set(card, { zIndex: 10 - index });
+
+      gsap.to(card, {
+        y: isPastCard ? -600 : 0,
+        opacity: isPastCard ? 0 : 1,
+        duration: 0.5,
+        ease: "power3.inOut",
+      });
+    });
+  }, [currentQuestion]);
 
   const handleAnswerSelect = (answerId) => {
     setAnswers((prev) => ({
@@ -167,7 +69,8 @@ export function WhoAreBlock() {
         setCurrentQuestion((prev) => prev + 1);
       } else {
         // Все вопросы отвечены, показываем результат
-        setShowResult(true);
+        setShowResult(false);
+        handleFinish();
       }
     }
   };
@@ -194,7 +97,9 @@ export function WhoAreBlock() {
       return testVariants[5].variantC; // "12–15 баллов"
     }
   };
+
   const handleFinish = () => {
+    onFinish();
     const code = getCurrentPromoCode() || getPromoCode();
     setPromo(code);
     const target = document.querySelector("#duo");
@@ -207,103 +112,95 @@ export function WhoAreBlock() {
     }
   };
 
+  if (!showResult) return;
   return (
     <div className="min-h-full mt-34 w-full  max-sm:mt-0 ">
       {!started ? (
-        <div className="flex flex-col justify-center items-center gap-10  max-sm:gap-10 ">
-          <div
-            ref={containerRef}
-            className="relative flex flex-col items-center justify-center  w-full max-sm:pt-25  max-sm:overflow-hidden"
-          >
-            <img
-              src="/glina2.png"
-              alt=""
-              className="absolute -top-10 left-0 max-sm:w-36  max-sm:top-3 max-sm:-left-10"
-            />
-            <div className="font-helvetica-black text-[#FF6B01] text-[140px] max-sm:text-[55px] uppercase leading-[110%] -rotate-8">
-              Какое вы
-            </div>
-            <div className="flex items-center gap-2">
-              <img src="/glina.png" alt="" className="max-sm:w-36" />
-              <div className="font-helvetica-black text-[#FF6B01] text-[140px] max-sm:text-[55px] uppercase leading-[110%] rotate-2">
-                дуо с
-              </div>
-            </div>
-            <img
-              src="/list.png"
-              alt=""
-              className="absolute top-12 right-0 max-sm:w-33 max-sm:bottom-0 max-sm:-top-2 max-sm:-rotate-150 max-sm:-right-10"
-            />
-            <div className="font-helvetica-black text-[#FF6B01] text-[140px] max-sm:text-[55px] uppercase leading-[110%] -rotate-2">
-              ребенком?
-            </div>
-          </div>
-
-          <div
-            ref={textRef}
-            className="w-3/5 mx-auto text-center font-rooftop text-xl  max-sm:w-full max-sm:px-4 max-sm:text-sm"
-          >
-            Пройдите тест из 5 вопросов, чтобы узнать, какое вы дуо Считайте
-            баллы за каждый ответ, который ближе вам и вашему ребенку. В конце
-            вы получите результат с кратким описанием вашей пары мамы и
-            сына/дочки. Давайте проверим, творцы вы, исследователи или все-таки
-            гурманы?
-          </div>
-
-          <button
-            ref={buttonRef}
-            onClick={() => setStarted(true)}
-            className="py-4 px-15 font-rooftop-bold text-2xl text-white bg-[#FF6B01] rounded-[20px] max-sm:text-base max-sm:px-10 "
-          >
-            Пройти тест
-          </button>
-        </div>
-      ) : showResult ? (
-        <div className="flex flex-col items-center justify-center mt-35 gap-10 max-sm:mt-25 max-sm:px-4">
-          <div className="text-center">
-            <h2 className="font-helvetica-black text-[#FF6B01] text-6xl max-sm:text-4xl mb-8">
-              Ваш результат
-            </h2>
-            <div className="font-rooftop-bold text-4xl max-sm:text-2xl text-center">
-              {calculateResult()}
-            </div>
-          </div>
-
-          <button
-            onClick={handleFinish}
-            className="py-4 px-15 font-rooftop-bold text-2xl text-white bg-[#FF6B01] rounded-[20px] max-sm:text-base max-sm:px-10 cursor-pointer"
-          >
-            Ваш дуо
-          </button>
-        </div>
+        <YourDuoBlock
+          onClick={() => {
+            setStarted(true);
+          }}
+        />
       ) : (
-        <div className="flex items-center justify-center mt-35 gap-15 max-sm:flex-col overflow-hidden max-sm:mt-25">
+        <div className="flex items-center justify-center mt-35 gap-15 max-sm:flex-col  max-sm:mt-25 ">
           <div
             ref={leftBlockRef}
-            className="w-4/5 max-w-[500px] overflow-hidden"
+            className="w-4/5 aspect-square max-w-[600px]  relative "
           >
-            {slides[currentQuestion] && (
-              <div
-                className="relative flex flex-col items-center justify-center gap-12 rounded-3xl border-11 border-solid px-16 py-12 max-sm:px-0 max-sm:py-0 bg-[#FFF7EE] overflow-hidden w-full h-80 sm:h-[450px] md:h-[470px]"
-                style={{
-                  borderColor: slides[currentQuestion].borderColor,
-                }}
-              >
-                <div className="absolute top-10 left-10 font-black text-6xl leading-none max-sm:text-2xl">
-                  {slides[currentQuestion].idText}
+            {slides.map((item, index) => {
+              if (index === 5) {
+                return (
+                  <div
+                    key={item.id}
+                    className={`slide-card flex flex-col items-center justify-center gap-5 max-sm:gap-3 rounded-3xl border-11 border-solid px-16 py-12 max-sm:px-0 max-sm:py-0 bg-[#FFF7EE] overflow-hidden w-full h-80 sm:h-[400px] md:h-[470px] absolute top-1/2 -translate-y-1/2 left-0 shadow-xl -rotate-${item.rotate} `}
+                    style={{
+                      borderColor: item.borderColor,
+                      zIndex: item.id * -1,
+                    }}
+                  >
+                    <div className=" font-rooftop-bold text-3xl leading-none max-sm:text-base text-center mb-2">
+                      Сложите набранные баллы и определите результат:
+                    </div>
+                    <div className="flex flex-col items-center justify-center gap-2 w-fit max-sm:gap-0">
+                      <div className="text-[#FF6B01] text-4xl font-helvetica-black uppercase max-sm:text-xl">
+                        5–8 баллов
+                      </div>
+                      <div className="font-rooftop text-lg leading-none text-center max-sm:text-xs">
+                        вы с ребенком <br /> настоящие{" "}
+                        <span className="font-rooftop-bold">Творцы</span>
+                      </div>
+                    </div>
+                    <div className="flex flex-col gap-2 items-center justify-center w-fit max-sm:gap-0">
+                      <div className="text-[#FF6B01] text-4xl font-helvetica-black uppercase max-sm:text-xl">
+                        8–12 баллов
+                      </div>
+                      <div className="font-rooftop text-lg leading-none text-center max-sm:text-xs">
+                        любознательная и веселая <br /> пара{" "}
+                        <span className="font-rooftop-bold">
+                          Исследователей
+                        </span>
+                      </div>
+                    </div>
+                    <div className="flex flex-col gap-2 items-center justify-center w-fit max-sm:gap-0">
+                      <div className="text-[#FF6B01] text-4xl font-helvetica-black uppercase max-sm:text-xl">
+                        12–15 баллов
+                      </div>
+                      <div className="font-rooftop text-lg leading-none text-center max-sm:text-xs">
+                        ваш аппетит подсказывает <br /> нам, что вы{" "}
+                        <span className="font-rooftop-bold">Гурманы</span>
+                      </div>
+                    </div>
+                    <div className="text-center font-rooftop-bold text-base sm:text-2xl md:text-3xl w-[95%] sm:w-[420px] md:w-[450px] max-sm:leading-none">
+                      {item.question}
+                    </div>
+                  </div>
+                );
+              }
+              return (
+                <div
+                  key={item.id}
+                  className={`slide-card flex flex-col items-center justify-center gap-12 rounded-3xl border-11 border-solid px-16 py-12 max-sm:px-0 max-sm:py-0 bg-[#FFF7EE] overflow-hidden w-full h-80 sm:h-[400px] md:h-[470px] absolute top-1/2 -translate-y-1/2 left-0 shadow-xl -rotate-${item.rotate} `}
+                  style={{
+                    borderColor: item.borderColor,
+                    zIndex: item.id * -1,
+                  }}
+                >
+                  <div className="absolute top-10 left-10 font-black text-6xl leading-none max-sm:text-2xl">
+                    {item.idText}
+                  </div>
+                  <div className="aspect-square">
+                    <img
+                      src={item.img}
+                      alt=""
+                      className="w-[120px] sm:w-[180px] md:w-[200px]"
+                    />
+                  </div>
+                  <div className="text-center font-rooftop-bold text-base sm:text-2xl md:text-3xl w-[95%] sm:w-[420px] md:w-[450px] max-sm:leading-none">
+                    {item.question}
+                  </div>
                 </div>
-                <div className="aspect-square">
-                  <img
-                    src={slides[currentQuestion].img}
-                    alt=""
-                    className="w-[120px] sm:w-[180px] md:w-[200px]"
-                  />
-                </div>
-                <div className="text-center font-rooftop-bold text-base sm:text-2xl md:text-3xl w-[95%] sm:w-[420px] md:w-[450px] max-sm:leading-none">
-                  {slides[currentQuestion].question}
-                </div>
-              </div>
-            )}
+              );
+            })}
           </div>
           <div
             ref={rightBlockRef}
@@ -325,7 +222,7 @@ export function WhoAreBlock() {
                       onClick={() => handleAnswerSelect(option.id)}
                       className={`w-full bg-[#F6EBDD] rounded-3xl pl-5 max-sm:pl-2 py-4 flex items-center gap-4 transition-all hover:bg-[#e5e0d8] ${
                         answers[currentQuestion + 1] === option.id
-                          ? "ring-2 ring-[#ff6b2c]"
+                          ? "ring-4 ring-[#ff6b2c]"
                           : ""
                       }`}
                     >
@@ -372,7 +269,7 @@ export function WhoAreBlock() {
                     : "bg-[#FF6B01] text-white hover:bg-[#e55a00]"
                 }`}
               >
-                {currentQuestion === slides.length - 1 ? "Завершить" : "Далее"}
+                {currentQuestion === slides.length - 1 ? "Результаты" : "Далее"}
               </button>
             </div>
           </div>
