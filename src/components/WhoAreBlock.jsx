@@ -89,17 +89,14 @@ export function WhoAreBlock({ onFinish }) {
       else if (answer === "C") totalPoints += 3;
     });
 
-    if (totalPoints >= 5 && totalPoints <= 8) {
-      return testVariants[5].variantA; // "5–8 баллов"
-    } else if (totalPoints >= 9 && totalPoints <= 12) {
-      return testVariants[5].variantB; // "8–12 баллов"
-    } else {
-      return testVariants[5].variantC; // "12–15 баллов"
-    }
+    if (totalPoints <= 8) return 1;
+    if (totalPoints <= 12) return 2;
+    return 3;
   };
 
   const handleFinish = () => {
-    onFinish();
+    const resultGroup = calculateResult();
+    onFinish(resultGroup);
     const code = getCurrentPromoCode() || getPromoCode();
     setPromo(code);
     const target = document.querySelector("#duo");

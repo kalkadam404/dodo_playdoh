@@ -1,9 +1,9 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-export function YourDuo() {
-  const [active, setActive] = useState(1);
+export function YourDuo({ initialActive = 1 }) {
+  const [active, setActive] = useState(initialActive);
   const containerRef = useRef(null);
   const mobileContainerRef = useRef(null);
 
@@ -90,6 +90,10 @@ export function YourDuo() {
       });
     }
   }, [active]);
+
+  useEffect(() => {
+    setActive(initialActive);
+  }, [initialActive]);
 
   const handleNext = () => {
     setActive((prev) => Math.min(prev + 1, duoTypes.length));

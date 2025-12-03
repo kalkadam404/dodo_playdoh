@@ -40,12 +40,12 @@ export const slides = [
     borderColor: "#E4185C",
     rotate: 4,
   },
-  {
-    id: 6,
-    idText: "",
-    img: null,
-    borderColor: "#FF6B01",
-    rotate: 0,
-    question: "",
-  },
+  // {
+  //   id: 6,
+  //   idText: "",
+  //   img: null,
+  //   borderColor: "#FF6B01",
+  //   rotate: 0,
+  //   question: "",
+  // },
 ];

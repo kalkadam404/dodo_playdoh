@@ -121,7 +121,7 @@ export function ReadCardsBlock() {
           <img
             src="/trend1.webp"
             alt=""
-            className="w-96 h-96 max-sm:w-66 max-sm:h-66 rounded-2xl "
+            className="w-96 h-100 max-sm:w-66 max-sm:h-66 rounded-2xl "
           />
           <h2 className="text-[26px] max-sm:text-xl font-rooftop-bold mt-1 text-black text-center max-sm:max-w-48 leading-none max-w-2xs">
             Как украсить стол в трендовом цвете сезона
@@ -144,7 +144,7 @@ export function ReadCardsBlock() {
           <img
             src="/fashion1.webp"
             alt=""
-            className="w-96 h-96 max-sm:w-66 max-sm:h-66 rounded-2xl "
+            className="w-96 h-100 max-sm:w-66 max-sm:h-66 rounded-2xl "
           />
           <h2 className="text-[26px] max-sm:text-xl font-rooftop-bold mt-1 text-black text-center max-sm:max-w-48 leading-none max-w-xs">
             3 модные детали, которые сделают ваш вечер особенным
@@ -167,7 +167,7 @@ export function ReadCardsBlock() {
           <img
             src="/diy1.webp"
             alt=""
-            className="w-96 h-96 max-sm:w-66 max-sm:h-66 rounded-2xl "
+            className="w-96 h-100 max-sm:w-66 max-sm:h-66 rounded-2xl "
           />
           <h2 className="text-[26px] max-sm:text-xl font-rooftop-bold mt-1 text-black text-center max-sm:max-w-48 leading-none max-w-2xs">
             Как сделать DIY-декор с детьми и не потерять стиль

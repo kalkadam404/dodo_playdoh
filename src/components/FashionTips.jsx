@@ -18,6 +18,8 @@ function FashionTips() {
   const paragraphRef = useRef(null);
   const buttonsRef = useRef(null);
   const [promo, setPromo] = useState(getCurrentPromoCode());
+  const [copied, setCopied] = useState(false);
+  const copyTimeoutRef = useRef(null);
 
   useEffect(() => {
     const handlePromoUpdate = () => {
@@ -86,6 +88,27 @@ function FashionTips() {
       );
   }, []);
 
+  useEffect(() => {
+    return () => {
+      if (copyTimeoutRef.current) clearTimeout(copyTimeoutRef.current);
+    };
+  }, []);
+
+  const handleCopyPromo = () => {
+    if (!promo) return;
+    const copyAction = navigator?.clipboard?.writeText
+      ? navigator.clipboard.writeText(promo)
+      : Promise.resolve();
+
+    copyAction
+      .then(() => {
+        setCopied(true);
+        if (copyTimeoutRef.current) clearTimeout(copyTimeoutRef.current);
+        copyTimeoutRef.current = setTimeout(() => setCopied(false), 2000);
+      })
+      .catch(() => {});
+  };
+
   return (
     <>
       <div className="bg-orange-500 rounded-t-4xl xl:rounded-t-[60px] max-sm:-mt-5 w-full ">
@@ -113,17 +136,35 @@ function FashionTips() {
             </p>
             <div
               ref={buttonsRef}
-              className="flex  font-bold justify-start gap-5 items-center w-full  max-sm:justify-between"
+              className="flex font-bold justify-start gap-5 items-center w-full max-sm:justify-between"
             >
-              <button className="bg-white text-black rounded-[20px] h-24 max-sm:h-auto  px-8   max-sm:py-3 max-sm:px-6 max-sm:flex-1">
-                <p className="text-2xl font-rooftop-bold max-sm:text-sm">
-                  Ваш промокод
-                </p>
-                <p className="text-4xl font-rooftop-bold max-sm:text-xl">
-                  {promo || "X-XX-XXX"}
-                </p>
-              </button>
-              <a href="https://dodopizza.kz/" target="_blank">
+              <div className="flex flex-col gap-2 max-sm:flex-1 relative">
+                <button
+                  onClick={handleCopyPromo}
+                  className="bg-white text-black rounded-[20px] h-24 max-sm:h-auto px-8 max-sm:py-3 max-sm:px-6 max-sm:flex-1"
+                >
+                  <p className="text-2xl font-rooftop-bold max-sm:text-sm">
+                    Ваш промокод
+                  </p>
+                  <p className="text-4xl font-rooftop-bold max-sm:text-xl">
+                    {promo || "X-XX-XXX"}
+                  </p>
+                </button>
+                {copied && (
+                  <p
+                    className={`absolute -bottom-8 left-2 text-white text-lg font-rooftop-bold max-sm:text-xs max-sm:-bottom-6 transition-opacity duration-300 ${
+                      copied ? "opacity-100" : "opacity-0"
+                    }`}
+                  >
+                    Промокод скопирован
+                  </p>
+                )}
+              </div>
+              <a
+                href="https://dodopizza.kz/almaty/product/play-dodo-kombo?utm_source=elle_fix&utm_medium=specStorie_web_app&utm_campaign=marketing_kz_PlayDoh_1125&utm_term="
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <button className=" text-4xl font-rooftop-bold h-24 px-8 rounded-[20px] border-4 border-white leading-none max-sm:h-auto max-sm:text-xl max-sm:py-3 max-sm:flex-1 text-center cursor-pointer">
                   Заказать <br /> в Dodo
                 </button>
