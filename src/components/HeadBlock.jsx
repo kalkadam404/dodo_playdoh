@@ -23,6 +23,7 @@ export function HeadBlock() {
       mobileTop: "50%",
       mobileLeft: "-15%",
       hideOnMobile: false,
+      zIndex: 1,
     },
     {
       id: 2,
@@ -30,9 +31,11 @@ export function HeadBlock() {
       top: "12%",
       left: "23%",
       mobileTop: "3%",
-      mobileLeft: "0%",
+      mobileLeft: "-4%",
       hideOnMobile: false,
+      zIndex: -1,
     },
+
     {
       id: 3,
       img: flamingo,
@@ -41,6 +44,7 @@ export function HeadBlock() {
       mobileTop: "55%",
       mobileLeft: "35%",
       hideOnMobile: false,
+      zIndex: 1,
     },
     {
       id: 4,
@@ -50,6 +54,7 @@ export function HeadBlock() {
       mobileTop: "-15%",
       mobileLeft: "35%",
       hideOnMobile: true,
+      zIndex: 1,
     },
     {
       id: 5,
@@ -59,15 +64,17 @@ export function HeadBlock() {
       mobileTop: "80%",
       mobileLeft: "-5%",
       hideOnMobile: false,
+      zIndex: 1,
     },
     {
       id: 6,
       img: bars,
       top: "20%",
       left: "72%",
-      mobileTop: "10%",
-      mobileLeft: "72%",
+      mobileTop: "-2%",
+      mobileLeft: "78%",
       hideOnMobile: false,
+      zIndex: -1,
     },
     {
       id: 7,
@@ -77,6 +84,7 @@ export function HeadBlock() {
       mobileTop: "-5%",
       mobileLeft: "77%",
       hideOnMobile: true,
+      zIndex: 1,
     },
     {
       id: 8,
@@ -86,6 +94,7 @@ export function HeadBlock() {
       mobileTop: "60%",
       mobileLeft: "73%",
       hideOnMobile: false,
+      zIndex: 1,
     },
     {
       id: 9,
@@ -95,6 +104,7 @@ export function HeadBlock() {
       mobileTop: "85%",
       mobileLeft: "50%",
       hideOnMobile: false,
+      zIndex: 1,
     },
   ];
   const visibleAnimals = isMobile
@@ -292,7 +302,7 @@ export function HeadBlock() {
         </svg>
       </div>
       <div className="relative  max-sm:pb-25 ">
-        <img src="/playdoh.png" alt="" className="mx-auto" />
+        <img src="/playdoh.png" alt="" className="mx-auto z-10" />
         {visibleAnimals.map((animal) => (
           <img
             key={animal.id}
@@ -302,6 +312,7 @@ export function HeadBlock() {
             style={{
               top: isMobile ? animal.mobileTop || animal.top : animal.top,
               left: isMobile ? animal.mobileLeft || animal.left : animal.left,
+              zIndex: animal.zIndex,
             }}
           />
         ))}
