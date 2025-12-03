@@ -106,7 +106,7 @@ export function YourDuo({ initialActive = 1 }) {
   return (
     <div
       id="duo"
-      className="min-h-screen bg-[#F6EBDD] rounded-t-[60px] mt-40 py-34 max-sm:pt-10  max-sm:mt-10 "
+      className="min-h-full bg-[#F6EBDD] rounded-t-[60px] mt-40 py-34 max-sm:pt-10  max-sm:mt-10 "
     >
       <div className="flex items-center justify-center gap-28  ">
         <div
