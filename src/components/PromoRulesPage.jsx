@@ -1,6 +1,12 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 function PromoRulesPage() {
+  useEffect(() => {
+    // Прокручиваем страницу в начало при монтировании компонента
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen bg-white py-10 px-4">
       <div className="container mx-auto max-w-5xl">
