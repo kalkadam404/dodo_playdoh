@@ -106,7 +106,7 @@ export function YourDuo({ initialActive = 1 }) {
   return (
     <div
       id="duo"
-      className="min-h-full bg-[#F6EBDD] rounded-t-[60px] mt-40 py-34 max-sm:pt-10  max-sm:mt-10 "
+      className="min-h-full bg-[#F6EBDD] rounded-t-[60px] py-34 max-sm:pt-10  max-sm:mt-10 "
     >
       <div className="flex items-center justify-center gap-28  ">
         <div
@@ -116,7 +116,7 @@ export function YourDuo({ initialActive = 1 }) {
           <div className="trend-card absolute top-0 left-0 -rotate-8  w-[395px] max-sm:w-[270px]  mx-auto bg-white rounded-3xl shadow-xl p-4 aspect-3/4 ">
             <div className=" overflow-hidden rounded-2xl">
               <img
-                src="/fam3.webp"
+                src="/fam1.webp"
                 alt="Card"
                 className="w-full h-auto object-cover"
               />
@@ -134,7 +134,7 @@ export function YourDuo({ initialActive = 1 }) {
           <div className="trend-card absolute top-0 left-0 -rotate-4  w-[395px] max-sm:w-[270px]  mx-auto bg-white rounded-3xl shadow-xl p-4 aspect-3/4 ">
             <div className="overflow-hidden rounded-2xl">
               <img
-                src="/fam1.webp"
+                src="/fam3.webp"
                 alt="Card"
                 className="w-full h-auto object-cover"
               />
@@ -142,15 +142,15 @@ export function YourDuo({ initialActive = 1 }) {
           </div>
         </div>
 
-        <div className=" flex items-start justify-center flex-col gap-10 w-1/2 max-sm:w-full max-sm:px-4 max-sm:items-center max-sm:gap-6">
-          <div className="flex flex-col items-start gap-10 w-full max-sm:items-center min-h-[530px] max-sm:min-h-auto">
+        <div className=" flex items-start justify-center flex-col gap-10 max-w-[550px] max-sm:w-full max-sm:px-4 max-sm:items-center max-sm:gap-6 ">
+          <div className="flex flex-col items-start gap-10  max-sm:items-center min-h-[530px] max-sm:min-h-auto  ">
             <div className="max-sm:text-center">
               <div className="text-[#0AC5A4] font-helvetica-black uppercase text-3xl max-sm:text-2xl mb-10 max-sm:mb-2">
                 {activeType.count}
               </div>
               <div className="max-sm:text-center">
                 <div className="text-[80px] max-sm:text-[54px] text-[#FF6B01] font-helvetica-black uppercase leading-none ">
-                  Ваш Дуо
+                  Вашe Дуо
                 </div>
                 <div className="text-[64px] max-sm:text-4xl text-[#FF6B01] font-helvetica-black uppercase leading-none ">
                   {activeType.yourDuo}
@@ -165,7 +165,7 @@ export function YourDuo({ initialActive = 1 }) {
               <div className="trend-card absolute top-0 left-0 -rotate-8  w-[395px] max-sm:w-[270px]  mx-auto bg-white rounded-3xl shadow-xl p-4 aspect-3/4 ">
                 <div className=" overflow-hidden rounded-2xl">
                   <img
-                    src="/fam3.webp"
+                    src="/fam1.webp"
                     alt="Card"
                     className="w-full h-auto object-cover"
                   />
@@ -183,7 +183,7 @@ export function YourDuo({ initialActive = 1 }) {
               <div className="trend-card absolute top-0 left-0 -rotate-4  w-[395px] max-sm:w-[270px]  mx-auto bg-white rounded-3xl shadow-xl p-4 aspect-3/4 ">
                 <div className="overflow-hidden rounded-2xl">
                   <img
-                    src="/fam1.webp"
+                    src="/fam3.webp"
                     alt="Card"
                     className="w-full h-auto object-cover"
                   />
@@ -193,14 +193,14 @@ export function YourDuo({ initialActive = 1 }) {
 
             <div
               ref={textRef}
-              className="font-rooftop text-xl mt-2 max-sm:text-sm max-sm:w-full max-sm:text-center"
+              className="font-rooftop text-xl mt-2 max-sm:text-sm max-sm:w-full max-sm:text-center w-4/5"
             >
               Вы —{" "}
               <span className="font-rooftop-bold">{activeType.firstText}</span>{" "}
               {activeType.desc}
             </div>
           </div>
-          <div className="flex items-center justify-between gap-5 mt-2 ">
+          {/* <div className="flex items-center justify-between gap-5 mt-2 ">
             <button
               onClick={handleBack}
               disabled={active === 1}
@@ -219,7 +219,7 @@ export function YourDuo({ initialActive = 1 }) {
             >
               Далее
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

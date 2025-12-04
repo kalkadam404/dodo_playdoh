@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { ReadCardsBlock } from "./ReadCardsBlock";
 import DodoAndPlayDoh from "/playdoh.png";
 import { useGSAP } from "@gsap/react";
@@ -16,6 +17,7 @@ function FashionTips() {
   const logoRef = useRef(null);
   const headingRef = useRef(null);
   const paragraphRef = useRef(null);
+  const policyRef = useRef(null);
   const buttonsRef = useRef(null);
   const [promo, setPromo] = useState(getCurrentPromoCode());
   const [copied, setCopied] = useState(false);
@@ -75,6 +77,16 @@ function FashionTips() {
         },
         "-=0.4"
       )
+      .from(
+        policyRef.current,
+        {
+          opacity: 0,
+          y: 20,
+          duration: 0.8,
+          ease: "power2.out",
+        },
+        "-=0.4"
+      )
       // Логотип сверху
       .from(
         logoRef.current,
@@ -118,25 +130,27 @@ function FashionTips() {
               ref={logoRef}
               src="/dodo_logo.png"
               alt=""
-              className="absolute -top-8 right-5 max-sm:w-28 max-sm:-top-10 max-sm:right-2 "
+              className="absolute -top-9 right-4 max-sm:w-28 max-sm:-top-10 max-sm:right-2 "
             />
             <h2
               ref={headingRef}
-              className="w-full font-helvetica-black xl:max-w-2xl text-6xl max-sm:text-[32px] uppercase leading-none tracking-tighter  mb-6 max-sm:mb-6"
+              className="w-3xl font-helvetica-black xl:max-w-2xl text-6xl max-sm:text-[32px] 
+              uppercase leading-none tracking-tighter  mb-6 max-sm:mb-6 max-sm:w-full"
             >
-              Получите <br /> промокод на <br /> заказ детского комбо Play Dodo
+              Получите <br /> промокод -10% <br /> на заказ детского <br />{" "}
+              комбо Play Dodo
             </h2>
             <p
               ref={paragraphRef}
               className="text-xl max-sm:text-base font-rooftop-bold
              mb-10 max-sm:mb-9 leading-none"
             >
-              Пробуйте детское комбо Play Dodo и узнавайте интересные факты о
-              редких животных Казахстана!
+              Пробуйте детское комбо Play Dodo и узнавайте <br /> интересные
+              факты о редких животных Казахстана!
             </p>
             <div
               ref={buttonsRef}
-              className="flex font-bold justify-start gap-5 items-center w-full max-sm:justify-between"
+              className="flex font-bold justify-start gap-5 items-center w-full max-sm:justify-between mb-8"
             >
               <div className="flex flex-col gap-2 max-sm:flex-1 relative">
                 <button
@@ -169,6 +183,17 @@ function FashionTips() {
                   Заказать <br /> в Dodo
                 </button>
               </a>
+            </div>
+            <div ref={policyRef} className="text-white font-rooftop text-sm">
+              Скидка действует при заказе через мобильное приложение,
+              применяется ко всему заказу, кроме добавленных ингредиентов.
+              Действует до 31 декабря 2025 года, пока продукция есть в наличии.{" "}
+              <Link
+                to="/promo-rules"
+                className="font-rooftop-bold underline underline-offset-auto [text-underline-position:from-font] hover:opacity-80 transition-opacity cursor-pointer"
+              >
+                Подробная информация о правилах акции
+              </Link>
             </div>
           </div>
           <div className="relative w-full max-w-lg ">

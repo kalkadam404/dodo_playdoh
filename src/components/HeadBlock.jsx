@@ -111,39 +111,42 @@ export function HeadBlock() {
     ? animals.filter((a) => !a.hideOnMobile)
     : animals;
 
-  const svg1Ref = useRef(null);
-  const svg2Ref = useRef(null);
-  const svg3Ref = useRef(null);
+  const desktopSvgRefs = useRef([]);
+  const mobileSvgRefs = useRef([]);
   const textRef = useRef(null);
   useGSAP(() => {
+    const isCurrentlyMobile =
+      typeof window !== "undefined" &&
+      window.matchMedia("(max-width: 768px)").matches;
+    const refsToAnimate = isCurrentlyMobile
+      ? mobileSvgRefs.current
+      : desktopSvgRefs.current;
     const tl = gsap.timeline();
-    tl.from(svg1Ref.current, {
-      y: -200,
-      opacity: 0,
-      duration: 1,
-      ease: "elastic.inOut",
-    })
-      .from(
-        svg2Ref.current,
-        { y: -200, opacity: 0, duration: 0.8, ease: "elastic.inOut" },
-        "-=0.5"
-      )
-      .from(
-        svg3Ref.current,
-        { y: -200, opacity: 0, duration: 0.9, ease: "elastic.inOut" },
-        "-=0.5"
-      )
-      .from(
-        textRef.current,
-        { opacity: 0, y: 50, duration: 1, ease: "power2.out" },
-        "+=0.3"
+    refsToAnimate.forEach((svgRef, index) => {
+      const durations = [1, 0.8, 0.9];
+      tl.from(
+        svgRef,
+        {
+          y: -200,
+          opacity: 0,
+          duration: durations[index] || 0.8,
+          ease: "elastic.inOut",
+        },
+        index === 0 ? undefined : "-=0.5"
       );
+    });
+    tl.from(
+      textRef.current,
+      { opacity: 0, y: 50, duration: 1, ease: "power2.out" },
+      "+=0.3"
+    );
   }, []);
 
   return (
     <div className="min-h-screen max-sm:px-4">
       <div className="flex flex-col items-center justify-center sm:hidden lg:hidden  mb-10">
         <svg
+          ref={(el) => (mobileSvgRefs.current[0] = el)}
           xmlns="http://www.w3.org/2000/svg"
           width="163"
           height="48"
@@ -168,6 +171,7 @@ export function HeadBlock() {
           />
         </svg>
         <svg
+          ref={(el) => (mobileSvgRefs.current[1] = el)}
           xmlns="http://www.w3.org/2000/svg"
           width="22"
           height="22"
@@ -180,6 +184,7 @@ export function HeadBlock() {
           />
         </svg>
         <svg
+          ref={(el) => (mobileSvgRefs.current[2] = el)}
           xmlns="http://www.w3.org/2000/svg"
           width="287"
           height="48"
@@ -222,7 +227,7 @@ export function HeadBlock() {
       </div>
       <div className="flex items-center justify-center gap-10 max-sm:hidden ">
         <svg
-          ref={svg1Ref}
+          ref={(el) => (desktopSvgRefs.current[0] = el)}
           xmlns="http://www.w3.org/2000/svg"
           width="379"
           height="111"
@@ -247,7 +252,7 @@ export function HeadBlock() {
           />
         </svg>
         <svg
-          ref={svg2Ref}
+          ref={(el) => (desktopSvgRefs.current[1] = el)}
           xmlns="http://www.w3.org/2000/svg"
           width="50"
           height="50"
@@ -260,7 +265,7 @@ export function HeadBlock() {
           />
         </svg>
         <svg
-          ref={svg3Ref}
+          ref={(el) => (desktopSvgRefs.current[2] = el)}
           width="665"
           height="110"
           viewBox="0 0 665 110"

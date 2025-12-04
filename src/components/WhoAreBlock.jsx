@@ -68,8 +68,6 @@ export function WhoAreBlock({ onFinish }) {
       if (currentQuestion < slides.length - 1) {
         setCurrentQuestion((prev) => prev + 1);
       } else {
-        // Все вопросы отвечены, показываем результат
-        setShowResult(false);
         handleFinish();
       }
     }
@@ -99,17 +97,9 @@ export function WhoAreBlock({ onFinish }) {
     onFinish(resultGroup);
     const code = getCurrentPromoCode() || getPromoCode();
     setPromo(code);
-    const target = document.querySelector("#duo");
-    if (target) {
-      gsap.to(window, {
-        scrollTo: target,
-        duration: 0.8,
-        onComplete: () => ScrollTrigger.refresh(), // пересчет ScrollTrigger
-      });
-    }
   };
 
-  if (!showResult) return;
+  if (!showResult) return <div className="h-px" />;
   return (
     <div className="min-h-full mt-34 w-full  max-sm:mt-0 ">
       {!started ? (
