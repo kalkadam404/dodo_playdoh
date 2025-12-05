@@ -5,6 +5,8 @@ function PromoRulesPage() {
   useEffect(() => {
     // Прокручиваем страницу в начало при монтировании компонента
     window.scrollTo(0, 0);
+    // Устанавливаем флаг, что мы на странице правил (для прокрутки при возврате)
+    sessionStorage.setItem("fromPromoRules", "true");
   }, []);
 
   return (

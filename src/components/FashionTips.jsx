@@ -123,7 +123,10 @@ function FashionTips() {
 
   return (
     <>
-      <div className="bg-orange-500 rounded-t-4xl xl:rounded-t-[60px] max-sm:-mt-5 w-full ">
+      <div
+        id="promo-code"
+        className="bg-orange-500 rounded-t-4xl xl:rounded-t-[60px] max-sm:-mt-5 w-full "
+      >
         <div className="flex items-center justify-center p-40 max-sm:p-4 max-sm:flex-col-reverse max-sm:gap-30 max-sm:pb-30 max-sm:pt-10">
           <div className="relative text-white w-full ">
             <img

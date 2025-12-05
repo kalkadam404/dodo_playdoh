@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { DiyDecor } from "./components/DiyDecor";
 import { FashionDetail } from "./components/FashionDetail";
 import FashionTips from "./components/FashionTips";
@@ -16,6 +16,8 @@ import { ScrollToPlugin, ScrollTrigger } from "gsap/all";
 gsap.registerPlugin(ScrollToPlugin, ScrollTrigger);
 
 function HomePage() {
+  const location = useLocation();
+
   // Восстанавливаем состояние из sessionStorage при монтировании
   const [testFinished, setTestFinished] = useState(() => {
     const saved = sessionStorage.getItem("testFinished");
@@ -37,17 +39,28 @@ function HomePage() {
   useEffect(() => {
     if (!testFinished) return;
 
-    const target = document.querySelector("#duo");
+    // Проверяем, возвращаемся ли мы со страницы правил
+    const fromPromoRules = sessionStorage.getItem("fromPromoRules") === "true";
 
-    gsap.to(window, {
-      duration: 1,
-      scrollTo: target,
-      ease: "power3.inOut",
-      onComplete: () => {
-        ScrollTrigger.refresh();
-      },
-    });
-  }, [testFinished]);
+    // Определяем цель прокрутки
+    const targetSelector = fromPromoRules ? "#promo-code" : "#duo";
+    const target = document.querySelector(targetSelector);
+
+    if (target) {
+      gsap.to(window, {
+        duration: 1,
+        scrollTo: target,
+        ease: "power3.inOut",
+        onComplete: () => {
+          ScrollTrigger.refresh();
+          // Очищаем флаг после прокрутки
+          if (fromPromoRules) {
+            sessionStorage.removeItem("fromPromoRules");
+          }
+        },
+      });
+    }
+  }, [testFinished, location.pathname]);
 
   return (
     <>
