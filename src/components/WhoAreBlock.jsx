@@ -9,7 +9,10 @@ import { testVariants } from "../constants/test";
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 export function WhoAreBlock({ onFinish }) {
-  const [started, setStarted] = useState(false);
+  // Проверяем, завершен ли тест в текущей сессии
+  const isTestFinished = sessionStorage.getItem("testFinished") === "true";
+
+  const [started, setStarted] = useState(isTestFinished);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState({});
   const [showResult, setShowResult] = useState(true);
@@ -100,6 +103,7 @@ export function WhoAreBlock({ onFinish }) {
   };
 
   if (!showResult) return <div className="h-px" />;
+
   return (
     <div className="min-h-full mt-34 w-full  max-sm:mt-0 ">
       {!started ? (

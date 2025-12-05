@@ -16,12 +16,22 @@ import { ScrollToPlugin, ScrollTrigger } from "gsap/all";
 gsap.registerPlugin(ScrollToPlugin, ScrollTrigger);
 
 function HomePage() {
-  const [testFinished, setTestFinished] = useState(false);
-  const [resultType, setResultType] = useState(null);
+  // Восстанавливаем состояние из sessionStorage при монтировании
+  const [testFinished, setTestFinished] = useState(() => {
+    const saved = sessionStorage.getItem("testFinished");
+    return saved === "true";
+  });
+  const [resultType, setResultType] = useState(() => {
+    const saved = sessionStorage.getItem("testResultType");
+    return saved ? parseInt(saved, 10) : null;
+  });
 
   const handleTestFinish = (resultGroup) => {
     setResultType(resultGroup);
     setTestFinished(true);
+    // Сохраняем состояние в sessionStorage (очистится при перезагрузке страницы)
+    sessionStorage.setItem("testFinished", "true");
+    sessionStorage.setItem("testResultType", resultGroup.toString());
   };
 
   useEffect(() => {
